@@ -8,7 +8,7 @@
 
 
         function setup() {
-            $("#loginButton").click(function () {
+            $("#loginButtonHeaders").click(function () {
                 var username = $("#usernameInput").val();
                 var password = $("#passwordInput").val();
 
@@ -26,6 +26,25 @@
                 });
 
             });
+
+            $("#loginButton").click(function () {
+                var username = $("#usernameInput").val();
+                var password = $("#passwordInput").val();
+
+                $.ajax({
+                    url: "http://catchapp-web-server.ap-southeast-2.elasticbeanstalk.com/login",
+                    type : "POST",
+                    data : {
+                        username : username,
+                        password : password
+                    },
+                    success: function (data,status) {
+                        $("#result").text(JSON.stringify(data));
+                    }
+
+                });
+
+            });
         }
 
     </script>
@@ -34,7 +53,9 @@
 <body>
 <input type="text" id="usernameInput" placeholder="User name">
 <input type="text" id="passwordInput" placeholder="Password">
-<input type="button" value="Login" id="loginButton">
+
+<input type="button" value="Login with headers" id="loginButtonHeaders">
+<input type="button" value="Login without headers" id="loginButton">
 
 <div id="result"></div>
 

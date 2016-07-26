@@ -13,11 +13,11 @@
                 var password = $("#passwordInput").val();
 
                 $.ajax({
-                    url: "http://catchapp-web-server.ap-southeast-2.elasticbeanstalk.com/login",
+                    url: "http://localhost:8080/login",
                     type : "POST",
                     beforeSend : function(xhr) {
-                        xhr.setRequestHeader("X-Username",username);
-                        xhr.setRequestHeader("X-Password",password);
+                        xhr.setRequestHeader("x-username",username);
+                        xhr.setRequestHeader("x-password",password);
                     },
                     success: function (data,status) {
                         $("#result").text(JSON.stringify(data));
@@ -32,8 +32,9 @@
                 var password = $("#passwordInput").val();
 
                 $.ajax({
-                    url: "http://catchapp-web-server.ap-southeast-2.elasticbeanstalk.com/login",
+                    url: "http://localhost:8080/login",
                     type : "POST",
+                    contentType : "application/json",
                     data : {
                         username : username,
                         password : password
